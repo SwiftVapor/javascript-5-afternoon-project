@@ -23,14 +23,14 @@ function outer() {
 */
   
 // Code Here
-
+const inner = outer();
 
 
 //Once you do that, invoke inner.
 
 //Code Here
 
-
+inner()
 
 ////////// PROBLEM 2 //////////
 
@@ -52,6 +52,7 @@ function callFriend(name) {
 */
 
 //Code Here
+callJake = callFriend('Jake');
 
 
 
@@ -63,7 +64,14 @@ function callFriend(name) {
 
 //Code Here
 
+const makeCounter = () =>{
+  let num = 0;
 
+  const addOne = () => {
+    return num +=1;
+  }
+  return addOne;
+}
 
 //Uncomment this once you make your function
 //   var count = makeCounter();
@@ -87,11 +95,17 @@ function callFriend(name) {
 
 function counterFactory(value) {
   // Code here.
-
+  let result = value;
   return {
-
-  };
-}
+    inc:  () => {
+        return result += 1;
+        
+    },
+    dec:  (num) => {
+        return result -= 1;
+    }
+  }
+};
 
 counter = counterFactory(10);
 // counter.inc() // 11
@@ -111,11 +125,13 @@ counter = counterFactory(10);
 
 function motivation( firstname, lastname ) {
   var welcomeText = "You're doing awesome, keep it up";
-
+  message = () =>{
+    return `${welcomeText} ${firstname} ${lastname}.`
+  }
   // code message function here.
 
   //Uncommment this to return the value of your message function
-  //return message;
+  return message;
 }
 
 var greeting = motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
@@ -144,6 +160,9 @@ var module = (function() {
   // outside our lexical scope
   return {
     // Code here.
+    publicMethod: ()=>{
+      return privateMethod()
+    }
   };
 })();
 
@@ -163,6 +182,12 @@ function secretNumber() {
 
   return {
     // Code here
+    addToSecret: (num) =>{
+      return secret += num;
+    },
+    takeAwayFromSecret: (num) => {
+      return secret -= num;
+    }
   };
 }
 
@@ -188,9 +213,9 @@ function secretNumber() {
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
-      console.log(i);
-    }, i * 1000);
+      setTimeout(function() {
+        console.log(i);
+      }, i * 1000);
+    }
   }
-}
 timeOutCounter();
