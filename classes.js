@@ -23,7 +23,7 @@
     - age
   Each employee has the following methods:
     - makeWidget
-      - This returns a string equal to the employees first name + last name + the word Widget
+      - This returns a string equal to the employees firstName name + lastName name + the word Widget
       - Example: "Dave Smith Widget"
 
   Call your class Employee and receive all the data in the constructor in the order listed above.
@@ -31,14 +31,14 @@
 
 //Code Here
 class Employee {
-  constructor(first, last, email, age){
-    this.first_name = first;
-    this.last_name = last;
+  constructor(firstName, lastName, email, age){
+    this.first_name = firstName;
+    this.last_name = lastName;
     this.email = email;
     this.age = age;
-    this.makeWidget = ()=>{
-      return `${this.first_name} ${this.last_name} Widget`;
-    };
+  };
+  makeWidget = ()=>{
+    return `${this.first_name} ${this.last_name} Widget`;
   };
 };
 
@@ -60,21 +60,16 @@ class Employee {
 //Code Here
 
 class Manager extends Employee{
-  constructor(first, last, email, age){
-    super(first, last, email, age)
+  constructor(firstName, lastName, email, age){
+    super(firstName, lastName, email, age)
     this.reports = [];
-    this.hire = function (employee){
+  }
+    hire (employee){
       this.reports.push(employee)
     };
-    this.fire = function (employee) {
-      for(let i = 0; i< this.reports.length; i++){
-        // console.log('i = ' + i)
-        if (this.reports[i] === employee){
-          this.reports.splice(i,1)
-        }
-      }
+    fire (i) {
+      this.reports.splice (i, 1)
     };
-  }
 }
 
 ////////// PROBLEM 3 //////////
@@ -101,13 +96,34 @@ class Manager extends Employee{
 //Code Here
 
 class ProgressiveManager extends Manager{
-  constructor(first, last, email, age){
-    super (first, last, email, age, reports);
+  constructor(firstName, lastName, email, age){
+    super(firstName, lastName, email, age)
     this.title = 'Not a manager';
     this.bonus = 0;
   }
+  hire(employee){
+    super.hire(employee);
+    this.updateTitle();
+  }
+  fire(i){
+    super.fire(i)
+    this.updateTitle();
+    this.bonus += 100;
+  }
+  updateTitle (){
+    let length = this.reports.length;
+    if (length >= 1 && length <= 3)
+    {this.title = "Barely Manager"}
+    else if (length >= 4  && length <= 10)
+    {this.title = "Mostly Manager"}
+    else if (length >= 11 && length <= 50)
+    {this.title = "Manager"}
+    else if (length >= 51 && length <= 100)
+    {this.title = "Manager Plus"}
+    else if (length >= 101)
+    {this.title = 'Bestest Manager'}
+  }
 }
-
 ////////// PROBLEM 4 - Black Diamond //////////
 
 /*
@@ -132,5 +148,3 @@ class ProgressiveManager extends Manager{
 */
 
 //Code Here
-
-
